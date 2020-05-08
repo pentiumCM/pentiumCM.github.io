@@ -1,0 +1,226 @@
+I"�[<h1 id="图像缩放处理-双线性插值算法">图像缩放处理-双线性插值算法</h1>
+<h2 id="一概念">一、概念</h2>
+<p><strong>双线性插值</strong>，又称为双线性内插。在数学上，双线性插值是对线性插值在二维直角网格上的扩展，用于对双变量函数（例如 x 和 y）进行插值。其核心思想是在两个方向分别进行一次线性插值。</p>
+
+<p><strong>举例如下：</strong>
+附：维基百科–双线性插值：
+<img src="https://img-blog.csdnimg.cn/2020030720192621.png" alt="在这里插入图片描述" />
+假如我们想得到未知函数 f 在点 P = (x，y) 的值，
+假设我们已知函数 f 在 Q<sub>11</sub> =  (x1，y1)，Q<sub>12</sub> = (x1，y2)，Q<sub>21</sub> = (x2，y1)，Q<sub>22</sub> = (x2，y2) 四个点的值。
+首先在 X 方向进行线性插值，得到：
+<img src="https://img-blog.csdnimg.cn/20200307203515309.png" alt="在这里插入图片描述" />
+然后在 y 方向进行线性插值，得到：
+<img src="https://img-blog.csdnimg.cn/20200307204144381.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3BlbnRpdW1DTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" />以上便是采用双线性插值，得到的 P (x，y) 的值 f（x，y）。</p>
+
+<p>注意此处如果先在 y 方向插值、再在 x 方向插值，其结果与按照上述顺序双线性插值的结果是一样的。</p>
+
+<h2 id="二图像处理中的-双线性插值函数">二、图像处理中的 双线性插值函数：</h2>
+<p>  插值法是一种根据原图（source）图片信息构造目标图像（destination）的方法。而其中的双线性插值法是一种目前使用较多的插值方法，他在精度和计算量之间有较好的权衡，所以使用较为广泛。</p>
+<h3 id="1最近邻插值法">1.最近邻插值法：</h3>
+<p>给定一个图片像素的矩阵，将1个3∗33∗3尺寸的矩阵使用最近邻插值法到4∗4的矩阵
+\(\begin{bmatrix}
+   1 &amp; 2 &amp; 3 \\
+   4 &amp; 5 &amp; 6 \\
+   7 &amp; 8 &amp; 9
+  \end{bmatrix}\tag{src}\)
+⟹
+\(\begin{bmatrix}
+   ？&amp; ？&amp; ？&amp; ？ \\
+   ？&amp; ？&amp; ？&amp; ？ \\
+   ？&amp; ？&amp; ？&amp; ？ \\
+   ？&amp; ？&amp; ？&amp; ？
+  \end{bmatrix}\tag{dst}\)</p>
+
+<p>原始图片像素矩阵（src）和缩放后图片像素矩阵（dst）的对应对应关系公式如下：$\color{red}（博客第三部分会对此公式进行优化）$</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src_x <span class="o">=</span> dst_x <span class="k">*</span> <span class="o">(</span>src_width / dst_width<span class="o">)</span>
+src_y <span class="o">=</span> dst_y <span class="k">*</span> <span class="o">(</span>src_heght / dst_height<span class="o">)</span>
+</code></pre></div></div>
+
+<p>dst[0][0] 对应的src位置如下：
+src_x = 0 * (3 / 4) = 0
+src_y = 0 * (3 / 4) = 0
+所以dst[0][0] = src[src_x][src_y] = src[0][0] = 1</p>
+
+<p>dst[0][1] 对应的src位置如下：
+src_x = 0 * (3 / 4) = 0
+src_y = 1 * (3 / 4) = 0.75
+所以dst[0][0] = src[src_x][src_y] = src[0][0.75]
+由于图片像素最小单位是1，所以四舍五入dst[0][1] = src[0][1] = 2</p>
+
+<p>以此类推，最终结果如下：
+\(\begin{bmatrix}
+   1&amp; 2&amp; 3&amp; 3 \\
+   4&amp; 5&amp; 6&amp; 6 \\
+   7&amp; 8&amp; 9&amp; 9 \\
+   7&amp; 8&amp; 9&amp; 9
+  \end{bmatrix}\tag{dst}\)</p>
+
+<p>  这是一种最基本、最简单的图像缩放算法，效果也是最不好的，放大后的图像有很严重的马赛克，缩小后的图像有很严重的失真；
+效果不好的根源就是其简单的最近邻插值方法引入了严重的图像失真，比如，当由目标图的坐标反推得到的源图的的坐标是一个$\color{red}浮点数$的时候，采用了$\color{red}四舍五入$的方法，直接采用了和这个浮点数最接近的象素的值，这种方法是很不科学的，当推得坐标值为 0.75的时候，不应该就简单的取为1，既然是0.75，比1要小0.25 ，比0要大0.75 ,那么目标象素值其实应该根据这个源图中虚拟的点四周的四个真实的点来按照一定的规律计算出来的，这样才能达到更好的缩放效果。</p>
+
+<h3 id="2-双线性插值法">2. 双线性插值法</h3>
+<p>  双线型内插值算法就是一种比较好的图像缩放算法，它充分的利用了源图中虚拟点四周的四个真实存在像素点的值（灰度值或者RGB值）来共同决定目标图中的一个像素点的值（灰度值或者RGB值），因此缩放效果比简单的最邻近插值要好很多，缩放后图像质量高，不会出现值（灰度值或者RGB值）不连续的情况。</p>
+
+<h6 id="双线性内插值算法colorred核心描述如下">双线性内插值算法$\color{red}核心$描述如下:</h6>
+<p>  对于一个目的像素点dst[x][y]，通过反向变换得到的源图像中 浮点坐标为 src[i + u][j + v] (其中i、j均为浮点坐标的整数部分，u、v为浮点坐标的小数部分，是取值[0,1)区间的浮点数)，则这个像素点的值 f(i+u,j+v) 可由原图像中坐标为 (i,j)、(i+1,j)、(i,j+1)、(i+1,j+1)所对应的$\color{red}最相邻四个像素点的值（灰度值或者RGB值）$决定，即：
+f(i+u,j+v) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)        <br />
+其中f(i,j)表示源图像(i,j)处的的值（灰度值或者RGB值），以此类推。</p>
+
+<h6 id="举例便于大伙理解">举例便于大伙理解：</h6>
+<p>  假如目标图的象素坐标为 （1，1），反推得到的对应于源图的坐标是（0.75 , 0.75）, 这其实只是一个概念上的虚拟象素，实际在源图中并不存在这样一个象素,那么目标图的象素（1，1）的取值不能够由这个虚拟象素来决定，而只能由源图的这四个象素共同决定：（0，0）（0，1）（1，0）（1，1），而由于（0.75,0.75）离（1，1）要更近一些，那么（1,1）所起的决定作用更大一些，这从公式1中的系数uv=0.75×0.75就可以体现出来，而（0.75,0.75）离（0，0）最远，所以（0，0）所起的决定作用就要小一些，公式中系数为(1-u)(1-v)=0.25×0.25也体现出了这一特点。
+$\color{red}即将最近的四个点采用加权平均，离得越近的点的权值越大。$</p>
+
+<h6 id="算法完整步骤详述">算法完整步骤详述：</h6>
+<p>  假设原始图像大小为size=m×n，其中m与n分别是原始图像的行数与列数。
+若图像的缩放因子是t（t&gt;0），则目标图像的大小size=t×m×t×n。对于目标图像的某个像素点P（x，y）通过P*1/t可得到对应的原始图像坐标P’( x1，y1),其中x1=x/t，y1=y/t，由于x1，y1都不是整数所以并不存在这样的点，这样可以找出与它相邻的四个像素点的值（灰度值或者RGB值）、f2、f3、f4，使用双线性插值算法就可以得到这个像素点P’(x1，y1)的值（灰度值或者RGB值），也就是像素点P（x，y）的值（灰度值或者RGB值）。</p>
+
+<p>一个完整的双线性插值算法可描述如下：</p>
+<ol>
+  <li>通过原始图像和比例因子得到新图像的大小，并用零矩阵初始化新图像。</li>
+  <li>由新图像的某个像素点（x，y）映射到原始图像(x’，y’)处。</li>
+  <li>对x’,y’取整得到（xx，yy）并得到(xx，yy)、(xx+1，yy)、（xx，yy+1）和（xx+1，yy+1）的值。</li>
+  <li>利用双线性插值得到像素点(x，y)的值并写回新图像。</li>
+</ol>
+
+<p>重复步骤2，3 直到新图像的所有像素点写完。</p>
+
+<h2 id="三分析opencvresize源码进行性能优化">三、分析opencv（resize）源码进行性能优化：</h2>
+<p>  如果采用以上的公式进行编程实现，会发现计算出来的结果会和使用openCV对应的resize（）函数得到的结果完全不一样，而且从直观上观察，图片缩放越小，差异越明显，上面的算法会使缩放之后的图片失真。</p>
+
+<h6 id="那么opencv到底是做了哪些优化呢">那么opencv到底是做了哪些优化呢？</h6>
+<p>主要原因： openCV 的 resize 函数对与这个公式进行了改进</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src_x <span class="o">=</span> dst_x <span class="k">*</span> <span class="o">(</span>src_width / dst_width<span class="o">)</span>
+src_y <span class="o">=</span> dst_y <span class="k">*</span> <span class="o">(</span>src_heght / dst_height<span class="o">)</span>
+</code></pre></div></div>
+<p>改为如下：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src_x <span class="o">=</span> <span class="o">(</span>j + 0.5<span class="o">)</span> <span class="k">*</span> float<span class="o">(</span>org_w / dst_w<span class="o">)</span> - 0.5
+src_y <span class="o">=</span> <span class="o">(</span>i + 0.5<span class="o">)</span> <span class="k">*</span> float<span class="o">(</span>org_h / dst_h<span class="o">)</span> - 0.5
+</code></pre></div></div>
+<p>  通过在公式中进行 $\color{red}+/-0.5$ 的处理，从来将放缩前后两个图像的几何中心重合，避免图像边缘上部分像素实际上并没有参与计算的问题。
+为什么通过 +/-0.5 可以实现将前后两个图像的集合中心重合，本人暂时还没有想明白
+本人也是通过手撕opencv的resize.cpp的源码得出这样的结论。
+<img src="https://img-blog.csdnimg.cn/20200309182754481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3BlbnRpdW1DTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" />
+有兴趣的朋友可以一起来研究一下opencv的源码，还是比较有意义的。
+github：<a href="https://github.com/opencv/opencv">https://github.com/opencv/opencv</a></p>
+
+<h6 id="参考资料">参考资料：</h6>
+<p>维基百科：<a href="https://zh.wikipedia.org/zh-cn/%E5%8F%8C%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC">https://zh.wikipedia.org/zh-cn/%E5%8F%8C%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC</a>
+博客：</p>
+<ol>
+  <li>双线性插值算法： 
+<a href="https://blog.csdn.net/xiaqunfeng123/article/details/17362881">https://blog.csdn.net/xiaqunfeng123/article/details/17362881</a></li>
+  <li>opencv处理放缩前后图片中心重合问题：
+<a href="https://www.cnblogs.com/funny-world/p/3162003.html">https://www.cnblogs.com/funny-world/p/3162003.html</a></li>
+</ol>
+
+<h2 id="四python代码实现">四、python代码实现：</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+# encoding: utf-8
+</span><span class="s">'''
+@Author  : pentiumCM
+@Email   : 842679178@qq.com
+@Software: PyCharm
+@File    : bilinear_interpolation.py
+@Time    : 2020/3/7 11:01
+@desc	 : 双线性插值,来调整图像的尺寸
+'''</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">bilinear</span><span class="p">(</span><span class="n">src_img</span><span class="p">,</span> <span class="n">dst_shape</span><span class="p">):</span>
+    <span class="s">"""
+    双线性插值法,来调整图片尺寸
+
+    :param org_img: 原始图片
+    :param dst_shape: 调整后的目标图片的尺寸
+    :return:    返回调整尺寸后的图片矩阵信息
+    """</span>
+    <span class="n">dst_img</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dst_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dst_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="n">dst_h</span><span class="p">,</span> <span class="n">dst_w</span> <span class="o">=</span> <span class="n">dst_shape</span>
+    <span class="n">src_h</span> <span class="o">=</span> <span class="n">src_img</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">src_w</span> <span class="o">=</span> <span class="n">src_img</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># i：纵坐标y，j：横坐标x
+</span>    <span class="c1"># 缩放因子，dw,dh
+</span>    <span class="n">scale_w</span> <span class="o">=</span> <span class="n">src_w</span> <span class="o">/</span> <span class="n">dst_w</span>
+    <span class="n">scale_h</span> <span class="o">=</span> <span class="n">src_h</span> <span class="o">/</span> <span class="n">dst_h</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dst_h</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dst_w</span><span class="p">):</span>
+            <span class="n">src_x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">((</span><span class="n">j</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">scale_w</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+            <span class="n">src_y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">scale_h</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+			
+			<span class="c1"># 向下取整，代表靠近源点的左上角的那一点的行列号	
+</span>            <span class="n">src_x_int</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">floor</span><span class="p">(</span><span class="n">src_x</span><span class="p">)</span>
+            <span class="n">src_y_int</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="n">floor</span><span class="p">(</span><span class="n">src_y</span><span class="p">)</span>
+            
+            <span class="c1"># 取出小数部分，用于构造权值
+</span>            <span class="n">src_x_float</span> <span class="o">=</span> <span class="n">src_x</span> <span class="o">-</span> <span class="n">src_x_int</span>
+            <span class="n">src_y_float</span> <span class="o">=</span> <span class="n">src_y</span> <span class="o">-</span> <span class="n">src_y_int</span>
+
+            <span class="k">if</span> <span class="n">src_x_int</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">src_w</span> <span class="ow">or</span> <span class="n">src_y_int</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">src_h</span><span class="p">:</span>
+                <span class="n">dst_img</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">src_img</span><span class="p">[</span><span class="n">src_y_int</span><span class="p">,</span> <span class="n">src_x_int</span><span class="p">,</span> <span class="p">:]</span>
+                <span class="k">continue</span>
+            <span class="n">dst_img</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">src_y_float</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">src_x_float</span><span class="p">)</span> <span class="o">*</span> <span class="n">src_img</span><span class="p">[</span><span class="n">src_y_int</span><span class="p">,</span> <span class="n">src_x_int</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> \
+                               <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">src_y_float</span><span class="p">)</span> <span class="o">*</span> <span class="n">src_x_float</span> <span class="o">*</span> <span class="n">src_img</span><span class="p">[</span><span class="n">src_y_int</span><span class="p">,</span> <span class="n">src_x_int</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> \
+                               <span class="n">src_y_float</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">src_x_float</span><span class="p">)</span> <span class="o">*</span> <span class="n">src_img</span><span class="p">[</span><span class="n">src_y_int</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">src_x_int</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> \
+                               <span class="n">src_y_float</span> <span class="o">*</span> <span class="n">src_x_float</span> <span class="o">*</span> <span class="n">src_img</span><span class="p">[</span><span class="n">src_y_int</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">src_x_int</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="k">return</span> <span class="n">dst_img</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">img_path</span> <span class="o">=</span> <span class="s">'F:/experiment/image_identification/License_plate_recognition/Img/1.jpg'</span>
+
+    <span class="n">src</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>
+    <span class="c1"># 高337 - 宽500
+</span>    <span class="n">src_shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">src</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">src</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># 定义图片缩放后的尺寸
+</span>    <span class="n">dst_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+    <span class="c1"># 图像放缩均采用双线性插值法
+</span>    <span class="c1"># opencv的放缩图像函数
+</span>    <span class="n">resize_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="p">.</span><span class="n">INTER_LINEAR</span><span class="p">)</span>
+
+    <span class="c1"># 自定义的图像放缩函数
+</span>    <span class="n">dst_img</span> <span class="o">=</span> <span class="n">bilinear</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst_shape</span><span class="p">)</span>
+
+    <span class="n">cv2</span><span class="p">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s">'F:/experiment/image_identification/License_plate_recognition/Img/1_new_resize.jpg'</span><span class="p">,</span> <span class="n">resize_image</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="p">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s">'F:/experiment/image_identification/License_plate_recognition/Img/1_new.jpg'</span><span class="p">,</span> <span class="n">dst_img</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h4 id="附上-直观效果图">附上： 直观效果图</h4>
+<p>如下图所示：</p>
+
+<p>我们要对这一张图片进行缩放：
+<img src="https://img-blog.csdnimg.cn/20200309190703869.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3BlbnRpdW1DTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
+<ol>
+  <li>
+    <p>这是使用双线性插值原始的公式生成的效果图：
+<img src="https://img-blog.csdnimg.cn/20200309190818370.jpg" alt="在这里插入图片描述" /></p>
+  </li>
+  <li>
+    <p>这是 修改过公式之后 使用0.5坐标平移使缩放前后中心重合的效果图：
+<img src="https://img-blog.csdnimg.cn/20200309191003934.jpg" alt="在这里插入图片描述" /></p>
+  </li>
+  <li>
+    <p>这是使用 opencv 的 resize 函数进行缩放的效果图：
+<img src="https://img-blog.csdnimg.cn/20200309191047923.jpg" alt="在这里插入图片描述" /></p>
+  </li>
+</ol>
+
+<p>可以看到第一种情况中：图片上的车牌已经出现失真的问题，而优化之后的第二种情况同opencv的resize方式，没有出现失真情况。</p>
+<h4 id="精度遗憾">精度遗憾：</h4>
+<p>  本人比对了opencv中resize方式的图片矩阵，和自定义算法处理缩放得到的图片矩阵，还是存在矩阵中极少部分中的数据有细微精度偏差。比如这个实验中，图片的RGB值会误差1，这应该是opencv源码中C++部分对于数据进行的精度优化，如果有了解这一误差缘由的大佬，希望得到您的指点。
+截选了部分数据供与参考</p>
+<ol>
+  <li>opencv（resize）的图片矩阵数据：
+<img src="https://img-blog.csdnimg.cn/20200309195047598.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3BlbnRpdW1DTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></li>
+  <li>自定义的双线性插值算法：
+<img src="https://img-blog.csdnimg.cn/20200309195235785.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3BlbnRpdW1DTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></li>
+</ol>
+:ET
