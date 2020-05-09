@@ -1,455 +1,389 @@
-## jekyll-theme-H2O
+Hux Blog
+========
 
-基于Jekyll的博客主题模板，简洁轻量。
+### [View alive Hux Blog &rarr;](https://huangxuan.me)  
 
-另外，还有此主题的[Ghost版本](https://github.com/eastpiger/ghost-theme-H2O) by [eastpiger](https://github.com/eastpiger)
-
-### Preview
-
-#### [在线预览 Live Demo →](http://liaokeyu.com/)
-
-![](screenshot/jekyll-theme-h2o-realhome.jpg)
-
-![](screenshot/jekyll-theme-h2o-realm.png)
-
-如果你喜欢这个博客模板，请在右上角star一下，非常感谢～
-
-If you like this theme or using it, please give a ⭐️ for motivation ;)
-
-如果想体验手机浏览效果，可以扫一下二维码：
-
-![](screenshot/1494404591.png)
-
-Using your smartphone to scan the QR Code
-
-### Features 特性
-
-#### CN
-
-- 代码高亮
-- 夜间模式
-- Disqus评论系统
-- 粉蓝两种主题色
-- 头图个性化底纹
-- 响应式设计
-- 社交图标
-- SEO标题优化
-- 文章标签索引
-- 博客文章搜索
-- 复制文章内容自动添加版权
-
-#### EN
-
-- Code highlight
-- Night mode
-- Disqus Comment System
-- Theme color: Blue & Pink
-- Hero Patterns
-- Responsive design
-- SNS Icon
-- Title SEO
-- Tags system
-- Search
-- Copyright text on copy event
-
-### Usage 快速开始
-
-首先你需要安装Jekyll，请查看文档: [快速指南](http://jekyll.com.cn/docs/quickstart/)
-
-如果你已经安装了Jekyll，请检查版本是否为3.0.x，你可以使用 ```gem update jekyll``` 命令进行升级。
-
-使用 ```gem install jekyll-paginate``` 或 ```sudo gem install jekyll-paginate``` 安装Jekyll的分页插件。
-
-> H2O主题基于Jekyll 3.2.1版本，不同版本之间可能存在部分差异，具体请参考[官方更新文档](https://jekyllrb.com/news/)
-
-点击右上角Fork按钮在你的Github上创建分支，或者```clone```到本地。
-
-``` git clone https://github.com/kaeyleo/jekyll-theme-H2O.git ```
-
-最后，在命令行输入 ```jekyll server``` 开启服务，就能在本地预览主题了。
-
-如果需要部署到线上环境，请参照配置文档的 **开始** 章节进行操作。
-
-### Document 配置文档
-
-#### CN
-
-- 开始
-	- [站点信息](#站点信息)
-	- [写一篇文章](#写一篇文章)
-- 组件
-	- [导航](#导航)
-	- [侧边栏](#侧边栏)
-	- [社交图标](#社交图标)
-	- [个人简介](#个人简介)
-	- [标签](#标签)
-	- [文章搜索](#文章搜索)
-	- [代码高亮](#代码高亮)
-	- [夜间模式](#夜间模式)
-- 个性化
-	- [博客封面、主题皮肤](#主题皮肤)
-	- [头图底纹](#头图底纹)
-- 高级部分
-	- [自定义](#自定义)
-- 集成服务
-	- [Disqus](#disqus)
-	- [Share.js](#sharejs)
-
-#### EN
-
-- Get Started
-	- [Site Settings](#站点信息)
-	- [Write Posts](#写一篇文章)
-- Components
-	- [Navigation Menu](#导航)
-	- [Sidebar](#侧边栏)
-	- [SNS Icons](#社交图标)
-	- [Personal Information](#个人简介)
-	- [Tags](#标签)
-	- [Search](#文章搜索)
-	- [Syntax Highlight](#代码高亮)
-	- [Night Mode](#夜间模式)
-- Style
-	- [Theme Color](#主题皮肤)
-	- [Hero Background Patterns](#头图底纹)
-- Advanced
-	- [Customization](#自定义)
-- Plugins
-	- [Disqus](#Disqus)
-	- [Share.js](#Share.js)
+![](http://huangxuan.me/img/blog-desktop.jpg)
 
 
-You can easily get started by modifying _config.yml
+Boilerplate (beta)
+------------------
 
-#### 站点信息
+**Bolierplate has been serveral verisons outdated. Helps wanted for updating it on par with the main repo.**
 
-你可以通用修改 `_config.yml` 文件来轻松的开始搭建自己的博客
+Boilerplate provide a clean version of this buzz blog.
 
 ```
+$ git clone git@github.com:Huxpro/huxblog-boilerplate.git
+```
+
+**[View alive Boilerplate &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
+
+
+Porting 
+--------
+
+- [**Hexo**](https://github.com/Kaijun/hexo-theme-huxblog) by @kaijun
+- [**React-SSR**](https://github.com/LucasIcarus/huxpro.github.io/tree/ssr) by @LucasIcarus
+
+
+Documents Translation
+---------------------
+
+ - ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese (Simplified)**: 感谢 [@BrucZhaoR](https://github.com/BruceZhaoR) 的 [中文翻译 &rarr;](https://github.com/Huxpro/huxpro.github.io/blob/master/README.zh.md)
+
+
+Releases
+--------
+
+#### V1.8.2
+
+- Merged #333, #336 from @JinsYin.
+- Add `Gemfile` due to increasing Bundler using.
+- TODO: `multilingual` could be more automative via configurations and convention.
+- Drop the entire `portfolio` page until a big rewrite of a better `project` page.
+
+#### V1.8.1
+
+- Improve multi-lingual implementation, see `about.html` or `_posts/2017-07-12-upgrading-eleme-to-pwa.markdown` for a example of uses.
+
+#### V1.8
+
+- Brand new [Archive](https://huangxuan.me/archive/) page! It combines previous Archive and Tag page and it's backward-cmpatible.
+Shout out to [@kitian616/jekyll-TeXt-theme](https://github.com/kitian616/jekyll-TeXt-theme) of bringing this idea. 
+- Improve engineering by extracting duplicated liquid templates into reuseable includes. This was proposed in #74 by @Kaijun but postponed for entirely 2.5 years! I wasn't able to merge his PR directly because of long-time divegence but the credit is belonging to @Kaijun.
+- Improved code block. Long-wanted line number are supported out of the box (thanks for @SmilingParadise's help from Sina Weibo), the default theme is updated to Atom One Dark as well (checkout FQA for how to change to your farovite theme)
+- MathJax support by @Voleking in #80. I choose to use the SVG renderer though. See [Mathjax, kramdown and Octopress](https://www.lucypark.kr/blog/2013/02/25/mathjax-kramdown-and-octopress/) for writing and escaping details.
+- Open Graph Protocol support by @Android-KitKat in #253
+- `header-img-credit` and `header-img-credit-href`
+- `nav-style: invert` and `header-style: text`
+
+#### V1.7
+
+- PWA / Service Worker support.
+
+#### v1.6
+
+- Change cdn to cdnjs for better HTTPS support
+
+#### V1.5.2
+
+- Feeling annoyed to delete my blog post after clone or pull? Try **Boilerplate (Beta)** to help you get started quickly and easily merge update.
+- `-apple-system` is added in font rule, which display beautiful new font **San Francisco** in iOS 9 by default.
+- Fixed [issue#15](https://github.com/Huxpro/huxpro.github.io/issues/15) about code wrap.
+
+#### V1.5.1
+
+- **[Comment](#comment)** support [**Disqus**](http://disqus.com) officially, thanks to @rpsh.
+
+#### V1.5
+
+- **[Comment](#comment)** and **[Analytics](#analytics)** is configurable now! We also add **Google Analytics support** and drop tencents. Both documents is updated.
+
+#### V1.4
+
+- **[Featured Tags](#featured-tags)** is now independent of [SideBar](#sidebar). Both documents is updated.
+- New **[SEO Title](#seo-title)** for SEO usage which is differ from the site title
+
+#### V1.3.1
+
+- Support **PingFang (苹方)**, the new Chinese font presented by [OS X El Capitan](http://www.apple.com/cn/osx/whats-new/)
+
+
+#### V1.3
+
+- Big Improvement to the **Navigation Menu** *(especially in Android)*:  Dropping the old, stuttering, low-performance [Bootstrap collapse.js](http://getbootstrap.com/javascript/#collapse),  replaced with an own wrote, [jank free](http://jankfree.org/) navbar menu in a pretty high-performance implementation of [Google Material Design](https://www.google.com/design/spec/material-design/introduction.html).
+
+<img src="http://huangxuan.me/img/blog-md-navbar.gif" width="320" />
+
+
+#### V1.2
+
+- Brand new **[Keynote Layout](#keynote-layout)** is provided for easily posting beautiful HTML presentations you have created with this blog
+
+
+#### V1.1
+
+- We now support a clean and gorgeous **[SideBar](#sidebar)** for displaying more info
+- **[Friends](#friends)** is also added as a common feature of blog help you do SEO
+
+#### V1.0
+
+- Full-feature **Tag** support
+- **Mobile first** user experience optimization
+- **Typographic optimization** for Chinese Fonts
+- **Network optimizaition** for China, dropping Google webfont, using local CDN
+- Using [Github Flavored Markdown](https://help.github.com/articles/github-flavored-markdown/)
+- Using Baidu, Tencent/QQ analytics
+- Using [DuoShuo](http://duoshuo.com/) as the Disqus-like third party discussion system
+
+
+Support
+-------
+
+- **Feel free to fork**. 
+- I'll appreciate it if you keep the OG author and github link at footer.
+- **Star** the repo if you like it.
+- **Open issues** so people could help you.
+
+
+Document
+--------
+
+* Get Started
+	* [Environment](#environment)
+	* [Get Started](#get-started)
+	* [Write Posts](#write-posts)
+* Components
+	* [SideBar](#sidebar)
+	* [Mini About Me](#mini-about-me)
+	* [Featured Tags](#featured-tags)
+	* [Friends](#friends)
+	* [Keynote Layout](#keynote-layout)
+* Comment & Analysis
+	* [Comment](#comment)
+	* [Analytics](#analytics)
+* Advanced
+	* [Build from source](#build-from-source)
+	* [Header Image](#header-image)
+	* [SEO Title](#seo-title)
+	* [Page Build Warning](#page-build-warning)
+* FAQ
+
+### Get Started
+
+If you have `npm` and `jekyll` installed, simply run `npm run start` from CLI and preview the themes at `localhost:4000` in your browser. It's watched and live-reloaded.
+
+
+### Start to customize
+
+You can easily customize the blog by modifying `_config.yml`:
+
+```yml
 # Site settings
-title: 'pentiumCM的独立博客' # 你的博客网站标题
-description: '很高兴能在这里与你分享我对技术和生活的思考。' # 站点描述
-keyword: 'pentiumCM, pentiumCM的独立博客, 前端, 设计' # 网站关键词
-url: 'http://liaokeyu.com' # 站点url
-baseurl: ''
+title: Hux Blog             # title of your website
+SEOTitle: Hux Blog          # check out docs for more detail
+description: "Cool Blog"    # ...
+
+# SNS settings      
+github_username: huxpro     # modify this account to yours
+weibo_username: huxpro      # the footer woule be auto-updated.
 
 # Build settings
-paginate: 6 # 一页放几篇文章
-paginate_path: 'page:num'
+paginate: 10                # nums of posts in one page
 ```
 
-其实大部分参数已经默认配置好了，你只需要通过文档了解它们，然后根据自己的需求去`_config.yml`文件里修改即可。
+For more options, please check out [Jekyll - Official Site](http://jekyllrb.com/). 
+Most of them are very descriptive so feel brave to dive into code directly as well. 
 
-#### 写一篇文章
 
-文章一般都放在`_posts`文件夹里，每篇文章的开头都需要设置一些头信息：
+### Writing Posts
 
-```
+Posts are simply Markdown files in the `_posts/`. 
+
+Metadata of posts are written in **front-matter**. A example post could start with:
+
+```yml
 ---
-layout: post
-title: 'H2O theme for Jekyll'
-subtitle: '或许是最漂亮的Jekyll主题'
-date: 2017-04-18
-categories: 技术
-cover: 'http://on2171g4d.bkt.clouddn.com/jekyll-theme-h2o-postcover.jpg'
-tags: jekyll 前端开发 设计
----
-```
-
-#### 导航
-
-博客顶部的导航栏信息需要以下面的格式进行配置：
-
-```
-# Navigation links
-nav:
-  home: '/'
-  tags: '/tags.html'
-```
-
-导航链接需要写上完整的html文件名，它们都是放于根目录下的，如果自建文件夹，请务必在`exclude` 参数中增加自建文件夹的文件名:
-
-```
-# Build settings
-exclude: ['node_modules', 'dev', 'package.json', '自定义的文件夹名字']
-```
-
-这样做是为了在Jekyll运行时排除某些文件被复制到运行文件`_site`里去。
-
-#### 侧边栏
-
-![](screenshot/jekyll-theme-h2o-sideBar.png)
-
-侧边栏分为两个部分：【个人简介】和【推荐标签】。当屏幕宽度小于960px时，侧边栏会被隐藏。
-
-#### 社交图标
-
-使用阿里的图标管理平台Iconfont整理了一套常用的社交图标用于博客的个人简介上，包括微博、知乎、掘金、简书、Github等十三个网站，并且对鼠标悬停时的样式颜色进行了优化。
-
-配置格式如下：
-
-```
-# SNS settings 配置社交网站url
-sns:
-  weibo: '//weibo.com/lovecolcol'
-  juejin: '//juejin.im/user/57a6f434165abd006159b4cc'
-  instagram: '//www.instagram.com/steveliaocn'
-  github: '//github.com/kaeyleo'
-```
-
-sns属性可选参数：
-
-社交网站 | 参数
---------|----
-微博 | `weibo`
-推特 | `twitter`
-Github | `github`
-知乎 | `zhihu`
-掘金 | `juejin`
-豆瓣 | `douban`
-简书 | `jianshu`
-UI中国 | `uicn`
-领英 | `linkedin`
-Facebook | `facebook`
-Youtube | `youtube`
-Instagram | `instagram`
-Dribbble | `dribbble`
-Behance | `behance`
-Medium | `medium`
-VK | `vk`
-
-#### 个人简介
-
-首页侧边栏和文章页面底部都会显示你的个人简介
-
-```
-# Author 配置博主信息
-author: 'Jack'
-nickname: 'xx'
-bio: '程序员'
-avatar: 'assets/img/avatar.jpg'
-```
-
-#### 标签
-
-对侧边栏的标签模块进行相应配置：
-
-```
-# Tags
-recommend-tags: true
-recommend-condition-size: 12
-
-```
-
-Tags配置说明：
-
- 属性 | 参数 | 描述
------|-----|-------
-`recommend-tags` | `true`, `false` | 是否显示推荐标签
-`recommend-condition-size` | `12` 或其他数字 | 推荐标签个数限制
-
-#### 文章搜索
-
-![](screenshot/jekyll-theme-h2o-search.png)
-
-基于Jekyll服务器生成文章索引文件 `search.json` 为博客提供搜索服务。输入文章标题或与文章标签相关的关键字即可。
-
-搜索功能默认是开启的，以卡片的样式显示在侧边栏底部。如需关闭请将配置文件 `_config.yml` 中 `search ` 属性的值改为 `false` 。
-
-```
-# Search
-search: true
-```
-
-说明 | 参数
-----|-----
-开启搜索功能 | `true`
-关闭搜索功能 | `false`
-
-#### 代码高亮
-
-模板引入了[Prism.js](http://prismjs.com)，一款轻量、可扩展的代码语法高亮库。
-
-很多知名网站如[MDN](https://developer.mozilla.org/)、[css-tricks](https://css-tricks.com/)也在用它，就连 JavaScript 之父 [Brendan Eich](https://brendaneich.com/) 也在个人博客上使用。
-
-![代码高亮](http://on2171g4d.bkt.clouddn.com/jekyll-theme-h2o-highlight.png)
-
-遵循 [HTML5](https://www.w3.org/TR/html5/grouping-content.html#the-pre-element) 标准，Prism 使用语义化的 `<pre>` 元素和 `<code>` 元素来标记代码区块：
-
-```
-<pre><code class="language-css">p { color: red }</code></pre>
-```
-
-在Markdown中你可以这样写：
-
-
-	 ```css
-		p { color: red }
-	 ```
-
-支持语言：
-
-- HTML
-- CSS
-- Sass
-- JavaScript
-- CoffeeScript
-- Java
-- C-like
-- Swift
-- PHP
-- Go
-- Python
-
-#### 夜间模式
-
-晚11点至次日凌晨6点自动开启夜间模式。如果不需要，则将配置文件 `_config.yml` 中 `nightMode ` 属性的值改为 `false` 即可。
-
-```
-# Night mode
-nightMode: true
-```
-
-说明 | 参数
-----|-----
-开启夜间模式 | `true`
-关闭夜间模式 | `false`
-
-#### 主题皮肤
-
-![](screenshot/jekyll-theme-h2o-themecolor.jpg)
-
-支持两种主题颜色蓝色（默认）和粉色
-
-主要效果体现在首页博客封面、顶部导航栏的logo以及鼠标悬停时文字显示的颜色效果。
-
-```
-# theme color
-theme-color: 'default' # pink or default
-```
-
-颜色 | 参数
-----|-----
-蓝色 | `default`
-粉色 | `pink`
-
-如果你希望在博客封面显示图片，需要去index.html文件中的头信息中添加 `header-img` 配置：
-
-```
----
-layout: default
-home-title: Steven的博客
-description: 开发者，创造者
-header-img: assets/img/banner.jpg
+layout:     post
+title:      "Hello 2015"
+subtitle:   "Hello World, Hello Blog"
+date:       2015-01-29 12:00:00
+author:     "Hux"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - Life
 ---
 ```
 
-#### 头图底纹
+### SideBar
 
-![](screenshot/jekyll-theme-h2o-heroPatterns.png)
+![](http://huangxuan.me/img/blog-sidebar.jpg)
 
-在没有图片的情况下单纯显示颜色会不会太无趣了点？于是想到了加入底纹元素，底纹素材是SVG格式的（保存在css样式里），加载比图片快很多。六种底纹（电路、食物、云海、钻石等等）供你选择，配置如下：
+**SideBar** provides possible modules to show off more personal information.
 
-```
-# Hero background patterns
-postPatterns: 'circuitBoard'
-```
-
-`postPatterns` 属性参数配置：
-
-底纹描述  |  参数
-------|------
-电路 | `circuitBoard`
-圆环 | `overlappingCircles`
-吃货日常：啃打鸡 | `food`
-土豪必备：钻石| `glamorous`
-圈圈叉叉 | `ticTacToe`
-中国风：云海 | `seaOfClouds`
-
-#### 自定义
-
-主题开发使用的技术栈也比较简单：引入jQuery类库、使用Sass代替CSS编写样式，使用Gulp完成Sass的编译、CSS和JavaScript的代码合并压缩等任务。
-
-如果你喜欢折腾，想对模板的代码进行修改，需要使用命令 `npm install` 安装 `package.json` 中的依赖，然后 `gulp` 一下即可开始你的自定义之旅。
-
-在了解H2O主题的目录结构之前，确保你对[Jekyll目录结构](http://jekyll.com.cn/docs/structure/)有所了解。
-
-```
-	.
-	├── _config.yml # 配置文件
-	├── _includes # 页面组件方便重用
-	|   ├── footer.html # 页脚
-	|   └── head.html # html文档的头部内容
-	|   └── header.html # 顶部菜单栏
-	|   └── pageNav.html # 文章列表分页组件
-	├── _layouts # 布局模板
-	|   ├── default.html # 默认模板
-	|   └── post.html # 文章页面模板
-	├── _posts # 这里放文章
-	|   ├── 2017-05-03-elements-of-javascript-style.md # 命名格式：年-月-日-文章标题.md
-	|   └── 2007-02-21-life-on-mars.md
-	├── _site # Jekyll将源码处理后生成的站点文件，里面的内容可直接发布
-	├── assets # 存放用于线上环境的静态资源，如需修改css和js文件请到dev文件夹
-	|   ├── css # dev文件夹中sass编译后的样式文件
-	|   └── fonts # 字体文件
-	|   └── icons # 图标文件
-	|   └── img #  图片文件
-	|   └── js # dev文件夹中处理后的脚本文件
-	├── dev # 开发文件
-	|   ├── js # 存放脚本源码
-	|   └── sass # 样式源码
-	|       └── app.scss # 整合下面的所有样式文件
-	|       └── base.scss # 引入字体、Reset部分样式
-	|       └── common.scss # 模板的主要样式
-	|       └── helper.scss # 工具样式
-	|       └── layouts.scss # 响应式布局
-	└── gulpfile.js # 自动化任务脚本
-	└── index.html # 模板首页
-	└── tags.html # 标签页面
-	└── 404.html # 404页面
-	└── package.json # 管理项目的依赖项
+```yml
+# Sidebar settings
+sidebar: true   # default true
+sidebar-about-description: "your description here"
+sidebar-avatar: /img/avatar-hux.jpg     # use absolute URL.
 ```
 
-值得注意的是，css及js的源码都在 `dev` 文件夹中，每一次保存 gulp 都会对它们进行处理并保存到 `assets` 文件夹以供 `_site` 上线环境使用。
+Modules *[Featured Tags](#featured-tags)*, *[Mini About Me](#mini-about-me)* and *[Friends](#friends)* are turned on by default and you can add your own. The sidebar is naturally responsive, i.e. be pushed to bottom in a smaller screen (`<= 992px`, according to [Bootstarp Grid System](http://getbootstrap.com/css/#grid))  
 
-#### Disqus
 
-[Disqus](https://disqus.com/)是一个第三方社交评论插件，体验相当不错。
+### Mini About Me
 
-在配置文件 `_config.yml` 中找到comments的相关配置，设置 `disqus` 参数为 `true` 打开评论功能（ `false` 为关闭），并且设置 `disqus_url`。
+**Mini-About-Me** displays your avatar, description and all SNS buttons if  `sidebar-avatar` and `sidebar-about-description` variables are set. 
 
-```
-# Comments
-comments:
-	disqus: true
-	disqus_url: 'https://your-disqus-username.disqus.com/embed.js'
-```
+It would be hidden in a smaller screen when the entire sidebar are pushed to bottom. Since there is already SNS portion there in the footer.
 
-注：`disqus` 默认值为 `false`
+### Featured Tags
 
-#### Share.js
+**Featured-Tags** is similar to any cool tag features in website like [Medium](http://medium.com).
+Started from V1.4, this module can be used even when sidebar is off and displayed always in the bottom. 
 
-为了让文章更方便地分享，使用了第三方分享插件[Share.js](https://github.com/overtrue/share.js)，支持一键分享到微博、QQ空间、QQ好友、微信、腾讯微博、豆瓣、Facebook、Twitter、Linkedin、Google+、点点等社交网站。
-
-```
-# Share
-social-share: true # 开启或者关闭分享功能
-social-share-items: ['wechat', 'weibo', 'douban','twitter']
+```yml
+# Featured Tags
+featured-tags: true  
+featured-condition-size: 1     # A tag will be featured if the size of it is more than this condition value
 ```
 
-### Contribution 贡献
+The only thing need to be paid attention to is `featured-condition-size`, which indicate a criteria that tags need to have to be able to "featured". Internally, a condition `{% if tag[1].size > {{site.featured-condition-size}} %}` are made.
 
-Any types of contribution are welcome. Thanks.
+### Friends
 
-接受各种形式的贡献，包括不限于提交问题与需求，修复代码。等待您的 ```Pull Request```
+Friends is a common feature of any blog. It helps with SEO if you have a bi-directional hyperlinks with your friends sites.
+This module can live when sidebar is off as well.
 
-#### 感谢参与代码贡献的伙伴
+Friends information is configured as a JSON string in `_config.yml`
 
-- [Ray-Eldath](https://github.com/Ray-Eldath)
-- [sctop](https://github.com/sctop)
-- [bananaappletw](https://github.com/bananaappletw)
-- [moycat](https://github.com/moycat)
+```yml
+# Friends
+friends: [
+    {
+        title: "Foo Blog",
+        href: "http://foo.github.io/"
+    },
+    {
+        title: "Bar Blog",
+        href: "http://bar.github.io"
+    }
+]
+```
 
-### License 许可证
 
-Jekyll-Theme-H2O is licensed under [MIT](https://github.com/kaeyleo/jekyll-theme-H2O/blob/master/LICENSE).
+### Keynote Layout
+
+![](http://huangxuan.me/img/blog-keynote.jpg)
+
+There is a increased trend to use Open Web technology for keynotes and presentations via Reveal.js, Impress.js, Slides, Prezi etc. I consider a modern blog should have first-class support to embed these HTML based presentation so **Keynote layout** are made.
+
+To use, in the **front-matter**:
+
+```yml
+---
+layout:     keynote
+iframe:     "http://huangxuan.me/js-module-7day/"
+---
+```
+
+The `iframe` element will be automatically resized to adapt different form factors and device orientation. 
+Because most of the keynote framework prevent the browser default scroll behavior. A bottom-padding is set to help user and imply user that more content could be presented below.
+
+
+### Comment
+
+Currently, [Disqus](http://disqus.com) <del> and [Duoshuo](http://duoshuo.com)</del> are supported as third party discussion system.
+
+First of all, you need to sign up and get your own account. **Repeat, DO NOT use mine!** (I have set Trusted Domains) It is deathly simple to sign up and you will get the full power of management system. Please give it a try!
+
+Second, from V1.5, you can easily complete your comment configuration by just adding your **short name** into `_config.yml`:
+
+```yml
+duoshuo_username: _your_duoshuo_short_name_
+# OR
+disqus_username: _your_disqus_short_name_
+```
+
+**To the old version user**, it's better that you pull the new version, otherwise you have to replace code in `post.html`, `keynote.html` and `about.html` on your own.
+
+<del>Furthermore, Duoshuo support Sharing. if you only wanna use Duoshuo comment without sharing, you can set `duoshuo_share: false`. </del>
+
+
+
+### Analytics
+
+From V1.5, Google Analytics and Baidu Tongji are supported with a simple config away:
+
+```yml
+# Baidu Analytics
+ba_track_id: 4cc1f2d8f3067386cc5cdb626a202900
+
+# Google Analytics
+ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+ga_domain: huangxuan.me
+```
+
+Just checkout the code offered by Google/Baidu, and copy paste here, all the rest is already done for you.
+
+(Google might ask for meta tag `google-site-verification`)
+
+
+### Build from source
+
+More customization could be made by changing the source code. [Grunt](gruntjs.com) were used for building this blog. (Thanks to Clean Blog.)
+
+There are numbers of tasks includes minifing JavaScript, compiling `.less` to `.css`, adding banners to keep the Apache 2.0 license intact, watching for changes, etc. Running `grunt ` to build files and `grunt watch` for watch-build.
+
+Critical code are located in `_include/` and `_layouts/`. Most of them are simply Jekyll [Liquid](https://github.com/Shopify/liquid/wiki) template.
+
+
+### Header Image
+
+Change header images of any pages or any posts is pretty easy as mentioned above. But, thanks to [issue #6 (in Chinese)](https://github.com/Huxpro/huxpro.github.io/issues/6) asked, **how to make it looks great?**
+
+**Well...it is actually a design issue**, not a coding stuff. It is better that you have basic design knowledge, but not is ok, let me told you how to make it well-designed:
+
+Seeing the title text above image is **white**, the image should be **dark** to emphasize the contract. so we can easily add a **black overlay with fews of opacity**, which is depends on the brightness of the original images you used. you can process it in Photoshop, Sketch etc.
+
+In technical views, it can be done with CSS. However, the opacity of the black overlay is really hard to assigned, **every image has different brightness so the  degree it should be adjusted is different so it is impossible to hard code it.**
+
+
+### SEO Title
+
+Before V1.4, site setting `title` is not only used for displayed in Home Page and Navbar, but also used to generate the `<title>` in HTML.
+It's possible that you want the two things different. For me, my site-title is **“Hux Blog”** but I want the title shows in search engine is **“黄玄的博客 | Hux Blog”** which is multi-language.
+
+So, the SEO Title is introduced to solve this problem, you can set `SEOTitle` different from `title`, and it would be only used to generate HTML `<title>` and setting DuoShuo Sharing.
+
+### Page Build Warning
+
+There are many possible reasons to cause a "Page Build Warning" email or similar error.
+
+One of these is that github changes its build environment.
+
+> You are attempting to use the 'pygments' highlighter, which is currently unsupported on GitHub Pages. Your site will use 'rouge' for highlighting instead. To suppress this warning, change the 'highlighter' value to 'rouge' in your '_config.yml'.
+
+So, just edit `_config.yml`, find `highlighter: pygments`, change it to `highlighter: rouge` and the warning will be gone.
+
+For other circumstances, check out existing issues or create a new one!
+
+
+
+FAQ
+---
+
+
+### Errors related with `bundle`
+
+Please follow [Using Jekyll with Bundler](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/) to add `jekyll`, then you could exec jekyll with dependencies managed by Bundler.
+
+```sh
+$ bundle exec jekyll serve
+```
+
+### How can I customize the theme of code block?
+
+This theme uses the default code syntax highlighter of jekyll, "rouge, which is compatible with Pygments theme so just pick any pygments theme css (e.g. from [here](http://jwarby.github.io/jekyll-pygments-themes/languages/javascript.html) and replace the content of `highlight.less`.
+
+### cannot load such file -- jekyll-paginate
+
+Executing this command to install this plugin:
+
+```yml
+$ gem install jekyll-paginate 
+```
+
+This blog started in Jekyll 2 time when `jekyll-paginate` is standard. With Jekyll 3, it's a plugin we included in `_config.yml`.
+
+
+
+License
+-------
+
+Apache License 2.0.
+Copyright (c) 2015-2020 Huxpro
+
+Hux Blog is derived from [Clean Blog Jekyll Theme (MIT License)](https://github.com/BlackrockDigital/startbootstrap-clean-blog-jekyll/)
+Copyright (c) 2013-2016 Blackrock Digital LLC.
