@@ -1,5 +1,5 @@
 # Site settings
-title: pentiumCM Blog 
+title: pentiumCM Site 
 SEOTitle: pentiumCM 博客 | pentiumCM Blog
 header-img: img/home-bg.jpg
 email: pentiumCM@gmail.com
@@ -13,7 +13,7 @@ future: true
 
 # SNS settings
 RSS: false
-# weibo_username:     huxpro
+weibo_username:     pentiumCM
 # zhihu_username:     huxpro
 github_username:    pentiumCM
 # twitter_username:   huxpro
