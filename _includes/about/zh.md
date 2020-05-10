@@ -38,7 +38,7 @@ Hi，我是陈敏，一名 java 娱乐圈的 NPC，android 码农出身，目前
   + 项目名称：病症结合中医辨证诊疗辅助平台  
   + 担任职位：java开发工程师  
   + 项目时间：2019.07 ~ 2019.09
-  + 测试服：http://47.100.109.11:9000
+  + 测试服：[http://47.100.109.11:9000](http://47.100.109.11:9000)
   + 项目技术：
     + 服务端：SpringBoot + Mybatis-plus + Shiro + Jwt + Swagger-ui + Redis                      
     + 前端技术：Ant-design-vue + Vue + Webpack  
@@ -53,7 +53,7 @@ Hi，我是陈敏，一名 java 娱乐圈的 NPC，android 码农出身，目前
   + 项目名称：江宁高新园知识导航平台   
   + 担任职位：android开发  
   + 项目时间：2017.6 ~ 2017.11 
-  + 正式服：http://www.jngxyipr.com/ 
+  + 正式服：[http://www.jngxyipr.com/](http://www.jngxyipr.com/) 
   + 项目描述: 江宁高新区知识产权导航平台是一款基于互联网的知识产权信息分析 和服务软件 系统。 
 
   + 项目技术:     

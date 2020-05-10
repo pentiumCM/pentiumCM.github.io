@@ -5,7 +5,7 @@ Hi, my name is Chen Min, a NPC of the java entertainment industry. I am a coder 
 At present, the scope of physical activities is mainly in the ancient capital Nanjing, and the avatars appear daily on [CSDN](https://blog.csdn.net/pentiumCM), [Weibo](https://weibo.com/pentiumCM), [Zhihu](), and [Github](https://github.com/pentiumCM).
 
 
-##### [Visualization of my programming language (WIP 🚧)] ()
+##### [Visualization of my programming language (WIP 🚧)]()
 
 This chart visualizes my experience and interest in various programming languages, along with some comments and explanations. I know that comparing programming languages is a very controversial thing ... please entertain yourself! Don't be too real;)
 
