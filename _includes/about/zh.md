@@ -2,7 +2,7 @@
 
 Hi，我是陈敏
 
-目前的物理活动范围主要在南京，分身日常出没于[博客](https://blog.csdn.net/pentiumCM)、[微博](https://weibo.com/u/5938408019)、[知乎]()、[Github](https://github.com/pentiumCM)。
+目前的物理活动范围主要在南京，分身日常出没于 [CSDN](https://blog.csdn.net/pentiumCM)、[微博](https://weibo.com/pentiumCM)、[知乎]()、[Github](https://github.com/pentiumCM)。
 
 <br>
 
@@ -11,4 +11,11 @@ Hi，我是陈敏
 这个图表可视化了我对于各种编程语言的使用经历、兴趣，还附带了一些评语和解释等等。 我知道对比编程语言是一件很有争议的事情……自娱自乐一下！不要太较真哦 ;)
 
 <br>
+
+
+## 教育经历
+| 时间 | 学校 | 学历 | 专业 |
+|-|-|-|-|
+| 2019.9 ~ 2021.12| 安徽理工大学 | 硕士研究生 |计算机技术|
+| 2015.9 ~ 2019.6 | 金陵科技学院| 本科 | 软件工程 |
 
