@@ -2,7 +2,7 @@
 
 Hi，我是陈敏，一名 java 娱乐圈的 NPC，android 码农出身，目前在学习 machine learning，deeping learning 的算法。
 
-目前的物理活动范围主要在 古都南京，分身日常出没于 [CSDN](https://blog.csdn.net/pentiumCM)、[微博](https://weibo.com/pentiumCM)、[知乎]()、[Github](https://github.com/pentiumCM)。
+目前的物理活动范围主要在淮安、南京，分身日常出没于 [CSDN](https://blog.csdn.net/pentiumCM)、[微博](https://weibo.com/pentiumCM)、[知乎]()、[Github](https://github.com/pentiumCM)。
 
 
 
