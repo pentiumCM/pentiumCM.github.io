@@ -1,7 +1,7 @@
-Hux Blog
+pentiumCM Site
 ========
 
-### [View alive Hux Blog &rarr;](https://huangxuan.me)  
+### [View alive pentiumCM Site &rarr;](https://www.pentiumcm.cn/)  
 
 ![](http://huangxuan.me/img/blog-desktop.jpg)
 
@@ -14,7 +14,7 @@ Boilerplate (beta)
 Boilerplate provide a clean version of this buzz blog.
 
 ```
-$ git clone git@github.com:Huxpro/huxblog-boilerplate.git
+$ git clone git@github.com:pentiumCM/pentiumCM.github.io.git
 ```
 
 **[View alive Boilerplate &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
